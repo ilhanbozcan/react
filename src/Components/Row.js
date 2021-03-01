@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import EditModal from "./EditModal";
+import Modal from './EditModal'
+ 
 
 export default function Row(props) {
-  console.log("geldiii");
   const [todo, setTodo] = useState(props.todo);
 
   const toogle = () => {
@@ -13,6 +15,11 @@ export default function Row(props) {
       status,
     });
   };
+
+  const openModal = () =>  {
+
+  }
+
   const className = todo.status && 'bg-danger';
   return (
     <tr className={className}>
@@ -20,10 +27,16 @@ export default function Row(props) {
       <td>{todo.date}</td>
       <td>{todo.status}</td>
       <td>
+
         <button onClick={toogle} className="btn btn-success">
           Set me
         </button>
+        <button onClick={props.delete} id={todo.id} className="btn btn-danger ml-3">
+          Delete
+        </button>
+
       </td>
+
     </tr>
   );
 }

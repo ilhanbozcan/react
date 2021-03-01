@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Row from "./Row";
 import { v4 as uuid } from 'uuid';
+import EditModal from './EditModal'
+
 
 export default function Table() {
   const [todos, setTodo] = useState([
@@ -25,6 +27,8 @@ export default function Table() {
     ])
     console.log(todos)
     console.log(inputs)
+    setInputs({...inputs,title:"",date:""})
+    toogle();
   };
 
   const handleOnChange = (event) => {
@@ -35,8 +39,12 @@ export default function Table() {
     });
   };
 
+  const deleteFunc = (event) => {
+    setTodo(todos.filter(item => item.id !== event.target.id));
+  }
   return (
     <div>
+
       <button onClick={toogle} className="btn btn-primary">
         Add Todo
       </button>
@@ -74,7 +82,7 @@ export default function Table() {
         <tbody>
           {todos.map((todo) => {
             return (
-              <Row key={todo.id} todo={todo} />
+              <Row delete={deleteFunc} key={todo.id}  todo={todo} />
             );
           })}
         </tbody>
